@@ -7,12 +7,12 @@ class BoardException(Exception):
 
 class BoardOutException(BoardException):
     def __str__(self):
-        return "Вы пытаетесь выстрелить за доску!"
+        return "- Там гражданские -"
 
 
 class BoardUsedException(BoardException):
     def __str__(self):
-        return "Вы уже стреляли в эту клетку"
+        return "- Вы стреляли в этот квадрат -"
 
 
 class BoardWrongShipException(BoardException):
@@ -124,14 +124,14 @@ class Board:
                 if ship.lives == 0:
                     self.count += 1
                     self.contour(ship, verb=True)
-                    print("Корабль уничтожен!")
+                    print("- КОРАБЛЬ УНИЧТОЖЕН -")
                     return False
                 else:
-                    print("Корабль ранен!")
+                    print("- Корабль ранен -")
                     return True
 
         self.field[d.x][d.y] = "."
-        print("Мимо!")
+        print("- Мимо -")
         return False
 
     def begin(self):
@@ -162,23 +162,23 @@ class Player:
 class AI(Player):
     def ask(self):
         d = Dot(randint(0, 5), randint(0, 5))
-        print(f"Ход компьютера: {d.x + 1} {d.y + 1}")
+        print(f"Огонь противника: {d.x + 1} {d.y + 1}")
         return d
 
 
 class User(Player):
     def ask(self):
         while True:
-            cords = input("Ваш ход: ").split()
+            cords = input("Огонь по координатам: ").split()
 
             if len(cords) != 2:
-                print("Введите 2 координаты! ")
+                print("- Введите 2 координаты - ")
                 continue
 
             x, y = cords
 
             if not (x.isdigit()) or not (y.isdigit()):
-                print("Введите числа! ")
+                print("- Введите числа - ")
                 continue
             x, y = int(x), int(y)
 
@@ -232,10 +232,10 @@ class Game:
 
     def print_boards(self):
         print("-" * 20)
-        print("    Доска пользователя:")
+        print("        ДОСКА ИГРОКА")
         print(self.us.board)
         print("-" * 20)
-        print("     Доска компьютера:")
+        print("     ДОСКА ПРОТИВНИКА")
         print(self.ai.board)
         print("-" * 20)
 
@@ -244,10 +244,10 @@ class Game:
         while True:
             self.print_boards()
             if num % 2 == 0:
-                print("Ходит пользователь!")
+                print("- Ход игрока -")
                 repeat = self.us.move()
             else:
-                print("Ходит компьютер!")
+                print("- Ход противника -")
                 repeat = self.ai.move()
 
             if repeat:
@@ -256,13 +256,13 @@ class Game:
             if self.ai.board.defeat():
                 self.print_boards()
                 print("-" * 20)
-                print("Пользователь выиграл!")
+                print("= ПОБЕДА ВРАГ ПОВЕРЖЕН =")
                 break
 
             if self.us.board.defeat():
                 self.print_boards()
                 print("-" * 20)
-                print("Компьютер выиграл!")
+                print("= ВАМ НАНЕСЛИ ПОРАЖЕНИЕ =")
                 break
             num += 1
 
