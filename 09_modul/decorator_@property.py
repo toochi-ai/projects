@@ -87,7 +87,9 @@ class Square:
     def side(self):
         return self._side
 
-    @side.setter
+    @side.setter  # декораторы .setter должны называться так же, как и метод,
+    # помеченный декоратором @property, для которого вы хотите
+    # устанавливать значение, иначе интерпретатор выдаст ошибку
     def side(self, value):
         if value > 0:
             self.value = value
@@ -98,3 +100,5 @@ class Square:
 
 
 print(Square("area =", 5).area)
+
+print('---')
