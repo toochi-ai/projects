@@ -23,6 +23,15 @@ class BinaryTree:
             self.right_child = new_child
         return self
 
+    def pre_order(self):
+        print(self.value)  # процедура обработки
+
+        if self.left_child is not None:  # если левый потомок существует
+            self.left_child.pre_order()  # рекурсивно вызываем функцию
+
+        if self.right_child is not None:  # если правый потомок существует
+            self.right_child.pre_order()  # рекурсивно вызываем функцию
+
 
 A_node = BinaryTree('A').insert_left('B').insert_right('C')
 # создаем корень и его потомков /7|2|5\
@@ -35,3 +44,5 @@ node_6 = node_7.right_child.insert_left(5).insert_right(11)
 node_5 = node_root.right_child.insert_right(9)
 # левое поддерево предыдущего (5) узла корня /4|9|\
 node_9 = node_5.right_child.insert_left(4)
+
+node_root.pre_order()
