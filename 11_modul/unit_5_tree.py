@@ -41,6 +41,15 @@ class BinaryTree:
 
         print(self.value)  # процедура обработки
 
+    def in_order(self):
+        if self.left_child is not None:  # если левый потомок существует
+            self.left_child.in_order()  # рекурсивно вызываем функцию
+
+        print(self.value)  # процедура обработки
+
+        if self.right_child is not None:  # если правый потомок существует
+            self.right_child.in_order()  # рекурсивно вызываем функцию
+
 
 A_node = BinaryTree('A').insert_left('B').insert_right('C')
 # создаем корень и его потомков /7|2|5\
@@ -57,3 +66,5 @@ node_9 = node_5.right_child.insert_left(4)
 node_root.pre_order()
 print('---')
 node_root.post_order()
+print('---')
+node_root.in_order()
