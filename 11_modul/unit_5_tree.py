@@ -1,3 +1,4 @@
+# подвид графов — деревья
 class BinaryTree:
     def __init__(self, value):
         self.value = value
