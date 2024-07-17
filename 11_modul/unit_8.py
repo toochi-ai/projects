@@ -1,3 +1,5 @@
+import random
+
 # Алгоритмы сортировки
 
 # Сортировка пузырьком
@@ -77,10 +79,10 @@ def merge(left, right):
 
 # Быстрая сортировка
 # -------------------
-def qsort(array, left, right):
+def qsort_random(array, left, right):
     middle = (left + right) // 2
 
-    p = array[middle]
+    p = random.choice(array[left: right + 1])
     i, j = left, right
     while i <= j:
         while array[i] < p:
@@ -93,6 +95,7 @@ def qsort(array, left, right):
             j -= 1
 
     if j > left:
-        qsort(array, left, j)
+        qsort_random(array, left, j)
     if right > i:
-        qsort(array, i, right)
+        qsort_random(array, i, right)
+
