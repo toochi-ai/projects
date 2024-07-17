@@ -117,8 +117,9 @@ class LinkedList:  # класс списка
             self.first = Node(value)
             self.last = self.first
         else:
-            new_node = Node(value, self.first)
-            self.first = new_node
+            new_node = Node(value)
+            self.last.next = new_node
+            self.last = new_node
 
     def popleft(self):
         if self.first is None:  # если список пустой, возвращаем None
@@ -147,6 +148,26 @@ class LinkedList:  # класс списка
             pointer.next = None  # обнуляем указатели, чтобы
             self.last = pointer  # предпоследний стал последним
             return node  # возвращаем сохранённый
+
+    def __iter__(self):  # объявляем класс как итератор
+        self.current = self.first  # в текущий элемент помещаем первый
+        return self  # возвращаем итератор
+
+    def __next__(self):  # метод перехода
+        if self.current is None:  # если текущий стал последним
+            raise StopIteration  # вызываем исключение
+        else:
+            node = self.current  # сохраняем текущий элемент
+            self.current = self.current.next  # совершаем переход
+            return node  # и возвращаем сохранённый
+
+    def __len__(self):
+        count = 0
+        pointer = self.first
+        while pointer is not None:
+            count += 1
+            pointer = pointer.next
+        return count
 
 
 LL = LinkedList()
