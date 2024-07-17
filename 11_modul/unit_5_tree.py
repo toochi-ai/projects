@@ -181,4 +181,4 @@ LL.pushright(5)
 LL.popleft()
 
 print(LL)
-print(LL.__len__())
+print(f"Размер списка: {LL.__len__()}")
