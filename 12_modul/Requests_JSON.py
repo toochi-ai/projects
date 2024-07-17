@@ -26,3 +26,10 @@ r = requests.post('https://httpbin.org/post', data={'key': 'value'})  # отпр
 
 print(r.content)  # содержимое ответа и его обработка происходит так же,
 # как и с GET-запросами, разницы никакой нет
+
+print('---')
+
+data = {'key': 'value'}
+r = requests.post('https://httpbin.org/post', json=json.dumps(data))  # отправляем POST-запрос,
+# но только в этот раз тип передаваемых данных будет JSON
+print(r.content)
