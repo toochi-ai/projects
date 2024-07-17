@@ -44,20 +44,21 @@ print(count)
 # Сортировка слиянием
 # --------------------
 
-def merge_sort(L):
-    if len(L) < 2:
-        return L[:]
+def merge_sort(L):  # «разделяй»
+    if len(L) < 2:  # если кусок массива равен 2,
+        return L[:]  # выходим из рекурсии
     else:
-        middle = len(L) // 2
-        left = merge_sort(L[:middle])
-        right = merge_sort(L[middle:])
-        return merge(left, right)
+        middle = len(L) // 2  # ищем середину
+        left = merge_sort(L[:middle])  # рекурсивно делим левую часть
+        right = merge_sort(L[middle:])  # и правую
+        return merge(left, right)  # выполняем слияние
 
 
-def merge(left, right):
-    result = []
-    i, j = 0, 0
+def merge(left, right):  # «властвуй»
+    result = []  # результирующий массив
+    i, j = 0, 0  # указатели на элементы
 
+    # пока указатели не вышли за границы
     while i < len(left) and j < len(right):
         if left[i] < right[j]:
             result.append(left[i])
@@ -66,6 +67,7 @@ def merge(left, right):
             result.append(right[j])
             j += 1
 
+    # добавляем хвосты
     while i < len(left):
         result.append(left[i])
         i += 1
@@ -98,4 +100,3 @@ def qsort_random(array, left, right):
         qsort_random(array, left, j)
     if right > i:
         qsort_random(array, i, right)
-
