@@ -25,9 +25,7 @@ print(red.get('dict1'))
 
 print('---')
 
-cont = True
-
-while cont:
+while True:
     action = input('action:\t')
     if action == 'write':
         name = input('name:\t')
