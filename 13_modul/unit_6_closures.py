@@ -34,3 +34,46 @@ test = create_test('user', 'password')
 test('/endpoint1', 1)
 test('/endpoint2', 1)
 # И теперь все эти тесты используют тот же идентификатор сессии, который был получен при вызове функции create_test!
+
+print('---')
+
+
+def create_counter():
+    i = 0
+
+    def func():
+        nonlocal i
+        i += 1
+        return i
+
+    return func
+
+
+counter = create_counter()
+print(counter())  # вернет "1"
+print(counter())  # вернет "2"
+print(counter())  # вернет "3"
+
+print('---')
+
+
+def create_unique_checker():
+    value = set()
+
+    def unique(p):
+        nonlocal value
+        if p not in value:
+            value.add(p)
+            return True
+        else:
+            return False
+
+    return unique
+
+
+unique_checker = create_unique_checker()
+print(unique_checker(5))
+print(unique_checker(5))
+print(unique_checker(10))
+
+print('---')
