@@ -135,25 +135,27 @@ result = power_sum(10000, 2)
 print(result)
 print('---')
 
+
 #  универсальный декоратор
 
 
-def retry_on_failure(func):
-    max_retries = 3
+def retry_on_failure(max_retries=3):
+    def decorator_(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    print(f"Function {func.__name__} failed with error: {e}. Retrying...")
+                    time.sleep(1)  # В реальном кейсе нам чаще всего надо будет подождать нек-ое кол-во времени
+            print(f"Function {func.__name__} failed after {max_retries} retries.")
 
-    def wrapper(*args, **kwargs):
-        for _ in range(max_retries):
-            try:
-                return func(*args, **kwargs)
-            except Exception as e:
-                print(f"Function {func.__name__} failed with error: {e}. Retrying...")
-                time.sleep(1)  # В реальном кейсе нам чаще всего надо будет подождать нек-ое кол-во времени
-        print(f"Function {func.__name__} failed after {max_retries} retries.")
+        return wrapper
 
-    return wrapper
+    return decorator_
 
 
-@retry_on_failure
+@retry_on_failure(max_retries=5)
 def fragile_function(*args, **kwargs):
     if random.random() < 0.5:  # В 50% случаев функция будет "Ломаться"
         raise Exception("An error occurred")
