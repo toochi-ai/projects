@@ -58,6 +58,8 @@ def timeit(func):
             res = func(*args, **kwargs)
             work_time = time.time() - start_time
             print(f'Функция {func.__name__} отработала за {work_time} секунд')
+            print(f'args: {args}')
+            print(f'kwargs: {kwargs}')
         else:
             res = func(*args, **kwargs)
         call_stack.pop()
