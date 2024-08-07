@@ -1,3 +1,6 @@
+import time
+
+
 def decorator(func):
     def wrapper(*args, **kwargs):
         print('Делаем что-то перед вызовом функции - изменяем ее поведение')
@@ -29,6 +32,7 @@ def decorator(func):
         print('Отработал декоратор')
         res = func(*args, **kwargs)
         return res
+
     return wrapper
 
 
@@ -39,3 +43,38 @@ def demo_func():
 
 demo_func()
 print('---')
+
+
+#  Оценка времени работы функции
+
+def timeit(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        work_time = time.time() - start_time
+        print(f'Функция {func.__name__} отработала за {work_time} секунд')
+        return res
+
+    return wrapper
+
+
+@timeit
+def large_sum(n):
+    return sum(range(n))
+
+
+@timeit
+def prime_numbers(n):
+    primes = []
+    for possiblePrime in range(2, n):
+        isPrime = True
+        for num in range(2, int(possiblePrime ** 0.5) + 1):
+            if possiblePrime % num == 0:
+                isPrime = False
+        if isPrime:
+            primes.append(possiblePrime)
+    return primes
+
+
+prime_numbers(193700)
+large_sum(193700)
