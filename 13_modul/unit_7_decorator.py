@@ -49,14 +49,32 @@ print('---')
 #  Оценка времени работы функции
 
 def timeit(func):
+    call_stack = []
+
     def wrapper(*args, **kwargs):
-        start_time = time.time()
-        res = func(*args, **kwargs)
-        work_time = time.time() - start_time
-        print(f'Функция {func.__name__} отработала за {work_time} секунд')
+        call_stack.append(None)
+        if len(call_stack) == 1:
+            start_time = time.time()
+            res = func(*args, **kwargs)
+            work_time = time.time() - start_time
+            print(f'Функция {func.__name__} отработала за {work_time} секунд')
+        else:
+            res = func(*args, **kwargs)
+        call_stack.pop()
         return res
 
     return wrapper
+
+
+@timeit
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+factorial(155)
 
 
 @timeit
@@ -83,7 +101,7 @@ print('---')
 
 
 # Генерация пароля
-
+@timeit
 def create_password_generator(length, symbols):
     used_passwords = set()
 
@@ -102,3 +120,14 @@ symbols_for_password = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123
 password_generator = create_password_generator(10, symbols_for_password)
 print(password_generator())
 print(password_generator())
+print('---')
+
+
+@timeit
+def power_sum(n, p):
+    return sum(i ** p for i in range(n))
+
+
+result = power_sum(10000, 2)
+
+print(result)
