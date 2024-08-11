@@ -1,0 +1,33 @@
+[
+   {
+       "id": 123,
+       "personal_data": {
+           "name": "Vasiliy",
+           "surname": "Grigoriev",
+           "credentials": {
+               "email": "vasgriforiev@testmail.ru",
+               "phone": "89223334453"
+           }
+       }
+   },
+   {
+       "id": 124,
+       "personal_data": {
+           "name": "Artem",
+           "surname": "Ivanov",
+           "credentials": {
+               "email": "artivanov@testmail.ru"
+           }
+       }
+   },
+   {
+       "id": 125,
+       "personal_data": {
+           "surname": "Avdeev",
+           "credentials": {
+               "email": "dmavdeev@testmail.ru",
+               "phone": "89224834490"
+           }
+       }
+   }
+]
