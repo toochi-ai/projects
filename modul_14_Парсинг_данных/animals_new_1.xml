@@ -1,0 +1,20 @@
+<animals home_id="822494">
+  <cat>
+    <name>Boris</name>
+    <breed>Siberian</breed>
+    <owner>Oleg</owner>
+    <age>4</age>
+  </cat>
+  <dog>
+    <name>Chorizo</name>
+    <breed>Dachshund</breed>
+    <owner>Elena</owner>
+    <age>3</age>
+  </dog>
+  <hamster>
+    <name>Arkadiy</name>
+    <breed>Dzungarian</breed>
+    <owner>Elena</owner>
+    <age>1</age>
+  </hamster>
+</animals>
