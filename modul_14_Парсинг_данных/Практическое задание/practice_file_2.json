@@ -1,0 +1,14 @@
+[
+    {
+        "category": "standard",
+        "income": 4300,
+        "avg_meal": 110.0,
+        "services_count": 3
+    },
+    {
+        "category": "double",
+        "income": 2700,
+        "avg_meal": 115.0,
+        "services_count": 2
+    }
+]
