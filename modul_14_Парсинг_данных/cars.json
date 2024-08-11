@@ -1,0 +1,24 @@
+[
+    {
+        "brand": "Kia",
+        "color": "white",
+        "engine": {
+            "volume": 1.6,
+            "power": 115
+        },
+        "name": "Rio",
+        "transmission": "auto",
+        "auto_window_lifter": true
+    },
+    {
+        "brand": "Chevrolet",
+        "color": "blue",
+        "engine": {
+            "volume": 1.6,
+            "power": 105
+        },
+        "name": "Lacetti",
+        "transmission": "manual",
+        "auto_window_lifter": false
+    }
+]

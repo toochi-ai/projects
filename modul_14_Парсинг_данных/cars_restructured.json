@@ -1,0 +1,12 @@
+[
+    {
+        "car_name": "Kia Rio",
+        "transmission": "auto",
+        "engine_volume": 1.6
+    },
+    {
+        "car_name": "Chevrolet Lacetti",
+        "transmission": "manual",
+        "engine_volume": 1.6
+    }
+]
