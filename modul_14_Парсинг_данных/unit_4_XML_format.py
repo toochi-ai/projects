@@ -31,5 +31,5 @@ animals_dict = {
 }
 
 with open('animals_new.xml', 'w') as animals_file:
-   parsed_data = xmltodict.unparse(animals_dict, pretty=True)
-   animals_data = animals_file.write(parsed_data)
+    parsed_data = xmltodict.unparse(animals_dict, pretty=True)
+    animals_data = animals_file.write(parsed_data)
