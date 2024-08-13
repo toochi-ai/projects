@@ -65,4 +65,32 @@ for element, options in animals_dict.items():
         opt_element.text = option
 
 tree = ET.ElementTree(root)
+ET.indent(tree)
 tree.write("animals_new_1.xml", encoding='unicode')
+
+items = {
+    'items': {
+        'sugar': {
+            'price': 45,
+            'type': 'cane',
+            'count': 73,
+            'weight': 50
+        },
+        'salt': {
+            'price': 33,
+            'count': 65,
+            'weight': 50
+        }
+    }
+}
+
+root = ET.Element('items')
+for key, element in items['items'].items():
+    an_element = ET.SubElement(root, key)
+    for key, option in element.items():
+        opt_element = ET.SubElement(an_element, key)
+        opt_element.text = str(option)
+
+tree = ET.ElementTree(root)
+ET.indent(tree)
+tree.write("items.xml", encoding='unicode')

@@ -1,0 +1,13 @@
+<items>
+  <sugar>
+    <price>45</price>
+    <type>cane</type>
+    <count>73</count>
+    <weight>50</weight>
+  </sugar>
+  <salt>
+    <price>33</price>
+    <count>65</count>
+    <weight>50</weight>
+  </salt>
+</items>
