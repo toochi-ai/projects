@@ -31,3 +31,11 @@ for page_num in range(1, 2):
         result[link.text] = parse_html(link_response.text)
 
 print(json.dumps(result, indent=4, ensure_ascii=False))
+
+url = ('https://leplants.ru/choose-plant/?utm_source=feature&utm_medium=choose&utm_campaign=share'
+       '&lfilter=type%3A7&page=2&sort=-viewers')
+driver = webdriver.Chrome()
+driver.get(url)
+
+print(driver.page_source)
+driver.quit()
