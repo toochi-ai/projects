@@ -1,0 +1,97 @@
+[
+    {
+        "data": "CSV",
+        "read": "read_csv",
+        "write": "to_csv"
+    },
+    {
+        "data": "Fixed-Width Text File",
+        "read": "read_fwf",
+        "write": ""
+    },
+    {
+        "data": "JSON",
+        "read": "read_json",
+        "write": "to_json"
+    },
+    {
+        "data": "HTML",
+        "read": "read_html",
+        "write": "to_html"
+    },
+    {
+        "data": "LaTeX",
+        "read": "",
+        "write": "Styler.to_latex"
+    },
+    {
+        "data": "XML",
+        "read": "read_xml",
+        "write": "to_xml"
+    },
+    {
+        "data": "Local clipboard",
+        "read": "read_clipboard",
+        "write": "to_clipboard"
+    },
+    {
+        "data": "MS Excel",
+        "read": "read_excel",
+        "write": "to_excel"
+    },
+    {
+        "data": "OpenDocument",
+        "read": "read_excel",
+        "write": ""
+    },
+    {
+        "data": "HDF5 Format",
+        "read": "read_hdf",
+        "write": "to_hdf"
+    },
+    {
+        "data": "Feather Format",
+        "read": "read_feather",
+        "write": "to_feather"
+    },
+    {
+        "data": "Parquet Format",
+        "read": "read_parquet",
+        "write": "to_parquet"
+    },
+    {
+        "data": "ORC Format",
+        "read": "read_orc",
+        "write": "to_orc"
+    },
+    {
+        "data": "Stata",
+        "read": "read_stata",
+        "write": "to_stata"
+    },
+    {
+        "data": "SAS",
+        "read": "read_sas",
+        "write": ""
+    },
+    {
+        "data": "SPSS",
+        "read": "read_spss",
+        "write": ""
+    },
+    {
+        "data": "Python Pickle Format",
+        "read": "read_pickle",
+        "write": "to_pickle"
+    },
+    {
+        "data": "SQL",
+        "read": "read_sql",
+        "write": "to_sql"
+    },
+    {
+        "data": "Google BigQuery",
+        "read": "read_gbq",
+        "write": "to_gbq"
+    }
+]
