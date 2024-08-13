@@ -87,8 +87,8 @@ items = {
 root = ET.Element('items')
 for key, element in items['items'].items():
     an_element = ET.SubElement(root, key)
-    for key, option in element.items():
-        opt_element = ET.SubElement(an_element, key)
+    for key_1, option in element.items():
+        opt_element = ET.SubElement(an_element, key_1)
         opt_element.text = str(option)
 
 tree = ET.ElementTree(root)
