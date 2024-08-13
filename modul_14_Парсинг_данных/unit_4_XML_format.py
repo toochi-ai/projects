@@ -64,6 +64,8 @@ for element, options in animals_dict.items():
         opt_element = ET.SubElement(an_element, key)
         opt_element.text = option
 
+root[0][0].text = 'Basil'
+
 tree = ET.ElementTree(root)
 ET.indent(tree)
 tree.write("animals_new_1.xml", encoding='unicode')
