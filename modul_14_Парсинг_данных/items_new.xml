@@ -1,0 +1,28 @@
+<items>
+ <item>
+   <name>sugar</name>
+   <price>45</price>
+   <type>cane</type>
+   <availability>
+     <count>73</count>
+     <weight>50</weight>
+   </availability>
+ </item>
+ <item>
+   <name>salt</name>
+   <price>33</price>
+   <availability>
+     <count>65</count>
+     <weight>50</weight>
+   </availability>
+ </item>
+ <item>
+   <name>pepper</name>
+   <price>56</price>
+   <type>black</type>
+   <availability>
+     <count>78</count>
+     <weight>50</weight>
+   </availability>
+ </item>
+</items>

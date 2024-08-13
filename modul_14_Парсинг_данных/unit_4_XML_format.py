@@ -118,3 +118,21 @@ for key, element in items['items'].items():
 tree = ET.ElementTree(root)
 ET.indent(tree)
 tree.write("items.xml", encoding='unicode')
+
+tree = ET.parse('items_new.xml')
+root = tree.getroot()
+
+for item in root:
+    item.remove(item.find('type'))
+    price = int(item.find('price').text)
+    count = int(item.find('availability').find('count').text)
+    weight = int(item.find('availability').find('weight').text)
+    item.find('price').text = str(price * count * weight)
+    full_weight = ET.SubElement(item, 'full_weight')
+    full_weight.text = str(count * weight)
+    item.remove(item.find('availability'))
+    item.find('price').tag = 'full_price'
+
+tree = ET.ElementTree(root)
+ET.indent(tree)
+tree.write('items_new1', encoding='unicode')
