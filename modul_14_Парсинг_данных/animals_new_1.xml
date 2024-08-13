@@ -17,4 +17,10 @@
     <owner>Elena</owner>
     <age>1</age>
   </hamster>
+  <squirrel>
+    <name>Batareyka</name>
+    <breed>Aberti</breed>
+    <owner>Dima</owner>
+    <age>1</age>
+  </squirrel>
 </animals>
