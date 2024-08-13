@@ -1,13 +1,22 @@
 <items>
   <sugar>
+    <name>sugar</name>
     <price>45</price>
     <type>cane</type>
     <count>73</count>
     <weight>50</weight>
   </sugar>
   <salt>
+    <name>salt</name>
     <price>33</price>
     <count>65</count>
     <weight>50</weight>
   </salt>
+  <pepper>
+    <name>pepper</name>
+    <price>56</price>
+    <type>black</type>
+    <count>78</count>
+    <weight>50</weight>
+  </pepper>
 </items>

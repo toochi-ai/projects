@@ -85,14 +85,23 @@ tree.write("animals_new_1.xml", encoding='unicode')
 items = {
     'items': {
         'sugar': {
+            'name': 'sugar',
             'price': 45,
             'type': 'cane',
             'count': 73,
             'weight': 50
         },
         'salt': {
+            'name': 'salt',
             'price': 33,
             'count': 65,
+            'weight': 50
+        },
+        'pepper': {
+            'name': 'pepper',
+            'price': 56,
+            'type': 'black',
+            'count': 78,
             'weight': 50
         }
     }
@@ -104,6 +113,7 @@ for key, element in items['items'].items():
     for key_1, option in element.items():
         opt_element = ET.SubElement(an_element, key_1)
         opt_element.text = str(option)
+
 
 tree = ET.ElementTree(root)
 ET.indent(tree)
