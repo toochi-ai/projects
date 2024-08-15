@@ -1,5 +1,6 @@
 import pandas as pd
 from pandas import read_excel
+from pandas import read_csv
 
 
 marks_data = read_excel('marks.xlsx')
@@ -23,3 +24,8 @@ goods_data = goods_data.to_dict()
 goods_data.pop('Продавец')
 goods_data_df = pd.DataFrame(goods_data)
 goods_data_df.to_excel('goods_second.xlsx', index=False)
+print('---')
+
+marks_data = read_csv('marcs.csv')
+
+print(marks_data.to_dict(orient='records'))
