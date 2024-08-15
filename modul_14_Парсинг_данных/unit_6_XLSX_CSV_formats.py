@@ -41,3 +41,10 @@ marcs_second = [
 
 marcs_second_df = pd.DataFrame(marcs_second)
 marcs_second_df.to_csv('marcs_second.csv', index=False)
+print('---')
+
+goods_data = pd.read_csv('goods.csv', delimiter=':')
+json_goods = goods_data.to_json(orient='records', indent=4, force_ascii=False)
+with open('goods_second.json', 'w') as file:
+    file.write(json_goods)
+
