@@ -1,0 +1,22 @@
+[
+  {
+    "room_id": 123,
+    "room": "b100",
+    "price": 2100,
+    "category": "standard",
+    "extras": {
+      "meals": [100, 130],
+      "services": [12, 54, 23]
+    }
+  },
+  {
+    "room_id": 124,
+    "room": "b103",
+    "price": 2200,
+    "category": "standard",
+    "extras": {
+      "meals": [100],
+      "services": []
+    }
+  }
+]
