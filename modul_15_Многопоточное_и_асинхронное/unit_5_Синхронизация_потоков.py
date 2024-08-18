@@ -31,3 +31,31 @@ if __name__ == "__main__":
         thread.join()
 
     print(threadsInfo)
+print('---')
+
+
+# Попытка сделать потокобезопасный класс
+class SomeLockClass:
+    def __init__(self):
+        # внутренние переменные
+        self.a = 1
+        self.b = 2
+        # внутренний лок
+        self.lock = threading.RLock()
+
+    # потокобезопасный метод изменения параметра а
+    def changeA(self, a):
+        with self.lock:
+            self.a = a
+
+    # потокобезопасный метод изменения параметра b
+    def changeB(self, b):
+        with self.lock:
+            self.b = b
+
+    # потокобезопасный метод одновременной смены параметров
+    def changeAB(self, a, b):
+        # зачем-то мы ещё раз используем лок перед вызовом и без того потокобезопасных методов
+        with self.lock:
+            self.changeA(a)  # зависания не будет
+            self.changeB(b)
