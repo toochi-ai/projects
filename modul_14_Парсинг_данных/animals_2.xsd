@@ -1,0 +1,21 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="animals">
+     <xs:complexType>
+        <xs:sequence>
+           <xs:element name="animal" maxOccurs="unbounded" >
+              <xs:complexType>
+                 <xs:sequence>
+                    <xs:element name="type" type="xs:string" />
+                    <xs:element name="name" type="xs:string" />
+                    <xs:element name="breed" type="xs:string" />
+                    <xs:element name="owner" type="xs:string" />
+                    <xs:element name="birth" type="xs:date" />
+                    <xs:element name="weight" type="xs:float"/>
+                 </xs:sequence>
+              </xs:complexType>
+           </xs:element>
+        </xs:sequence>
+     </xs:complexType>
+  </xs:element>
+</xs:schema>
+

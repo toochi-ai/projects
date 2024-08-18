@@ -1,3 +1,4 @@
+import xmlschema
 from jsonschema import Draft202012Validator
 
 json_data = {"name": "Oleg", "age": 30, "goods": ['apple', 'orange']}
@@ -66,3 +67,7 @@ schema = {
 
 validator = Draft202012Validator(schema)
 print(validator.is_valid(json_data))
+print('---')
+
+my_schema = xmlschema.XMLSchema('animals_2.xsd')
+print(my_schema.is_valid('animals_2.xml'))

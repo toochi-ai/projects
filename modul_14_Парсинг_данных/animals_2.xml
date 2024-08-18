@@ -1,0 +1,26 @@
+<animals>
+  <animal>
+     <type>Cat</type>
+     <name>Boris</name>
+     <breed>Siberian</breed>
+     <owner>Oleg</owner>
+     <birth>2021-01-12</birth>
+     <weight>3.1</weight>
+  </animal>
+  <animal>
+     <type>Dog</type>
+     <name>Сhorizo</name>
+     <breed>Dachshund</breed>
+     <owner>Elena</owner>
+     <birth>2022-01-12</birth>
+     <weight>4.2</weight>
+  </animal>
+  <animal>
+     <type>Hamster</type>
+     <name>Arkadiy</name>
+     <breed>Dzungarian</breed>
+     <owner>Elena</owner>
+     <birth>2023-01-12</birth>
+     <weight>0.3</weight>
+  </animal>
+</animals>
