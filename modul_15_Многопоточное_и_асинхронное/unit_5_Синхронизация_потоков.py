@@ -8,21 +8,17 @@ def threadFunc(lock):
     global gX
     for i in range(100000):
         # захватываем лок, делая все операции далее монопольными
-        lock.acquire()
-        gX = gX + 1
-        # освобождаем лок
-        lock.release()
+        with lock:
+            gX = gX + 1
 
 
 if __name__ == "__main__":
     gX = 0
 
     threads = []
-    # создаём лок
-    lock = threading.Lock()
     for i in range(5):
         # и передаём его в качестве аргумента в каждый поток
-        threads.append(threading.Thread(target=threadFunc, args=(lock)))
+        threads.append(threading.Thread(target=threadFunc, args=()))
 
     for thread in threads:
         thread.start()
