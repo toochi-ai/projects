@@ -3,7 +3,6 @@ import threading
 # общая переменная
 gX = 0
 
-
 # функция, которая увеличивает на 1 gX 100000 раз
 def threadFunc():
     print('thread started')
