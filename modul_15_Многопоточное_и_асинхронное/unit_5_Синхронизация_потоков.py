@@ -1,3 +1,4 @@
+import concurrent.futures
 import queue
 import random
 import threading
@@ -282,8 +283,27 @@ def procFunc(number):
 if __name__ == '__main__':
     # параметры, с которыми мы хотим проводить вычисление
     numbers = [5, 10, 20]
-    # создаём объект Pool с указанием количества "работников"
+    # создаём объект Pool с указанием количества "работников" <*********************************
     pool = Pool(processes=3)
     # для каждого объекта из списка Pool автоматически назначает работника
     mapped = pool.map(procFunc, numbers)
     print(mapped)
+print('---')
+
+
+#  Для использования пулов с потоками существует объект ThreadPoolExecutor,
+#  который позволяет нам реализовать такую же логику.
+
+def threadFunc(number):
+    return number * number
+
+
+if __name__ == '__main__':
+    mapped = None
+    # создаём объект Pool с указанием количества обработчиков
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+        # передаём параметры в метод map
+        mapped = executor.map(threadFunc, [1, 2, 3, 4, 5])
+        # метод map возвращает не список, а итерируемый объект с результатом
+        # переводим его в список и выводим на печать
+        print(list(mapped))
