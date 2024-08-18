@@ -100,3 +100,36 @@ if __name__ == '__main__':
 
     producer_thread.join()
     consumer_thread.join()
+print('---')
+
+g_maxProduct = 100
+g_storage = []
+g_lock = threading.BoundedSemaphore(3)
+
+
+def producer():
+    for i in range(g_maxProduct):
+        g_lock.acquire()
+        g_storage.append(random.randint(0, 100))
+
+
+def consumer():
+    pop_count = 0
+    while True:
+        if g_storage:
+            pop_count += 1
+            print(f"{pop_count}: {g_storage.pop()}")
+            g_lock.release()
+        if pop_count == g_maxProduct:
+            break
+
+
+if __name__ == '__main__':
+    producer_thread = threading.Thread(target=producer)
+    consumer_thread = threading.Thread(target=consumer)
+
+    producer_thread.start()
+    consumer_thread.start()
+
+    producer_thread.join()
+    consumer_thread.join()
