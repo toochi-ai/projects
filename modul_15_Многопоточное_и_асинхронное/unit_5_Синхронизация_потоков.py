@@ -1,3 +1,4 @@
+import queue
 import random
 import threading
 import time
@@ -221,3 +222,42 @@ if __name__ == '__main__':
 
     producer_thread.join()
     consumer_thread.join()
+print('---')
+
+#  Очереди
+#
+# Другой способ синхронизации заключается в использовании потокобезопасных очередей Queue,
+# которые позволяют одному потоку (производителю) вставлять сообщения в очередь,
+# а другому (потребителю) — извлекать их из очереди и использовать (как на конвейере).
+
+# событие, которое служит для потребителя признаком,
+# что событий можно больше не ждать
+event = threading.Event()
+
+
+# производитель, который производит 10 сообщений
+# и кладёт их в очередь
+def producerFunc(q):
+    for i in range(1, 11):
+        time.sleep(0.1)  # время, чтобы произвести сообщение
+        q.put(f"message {i}")
+    event.set()
+
+
+# потребитель, который считывает события из очереди
+def consumerFunc(q):
+    while not event.is_set() or not q.empty():
+        print(q.get())
+
+
+if __name__ == '__main__':
+    # создаём очередь, передаём её в потоки и запускаем на выполнение
+    q = queue.Queue()
+    producer = threading.Thread(target=producerFunc, args=(q,))
+    consumer = threading.Thread(target=consumerFunc, args=(q,))
+
+    producer.start()
+    consumer.start()
+
+    producer.join()
+    consumer.join()
