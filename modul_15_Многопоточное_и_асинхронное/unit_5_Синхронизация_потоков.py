@@ -1,3 +1,4 @@
+import random
 import threading
 
 gX = 0
@@ -59,3 +60,43 @@ class SomeLockClass:
         with self.lock:
             self.changeA(a)  # зависания не будет
             self.changeB(b)
+
+
+# максимальный размер произведённой продукции
+g_maxProduct = 100
+# переменная склада
+g_storage = []
+# лок
+g_lock = threading.Lock()
+
+
+def producer():
+    # код производителя
+    for i in range(g_maxProduct):
+        with g_lock:
+            # отправляем продукцию на склад
+            g_storage.append(random.randint(0, 100))
+
+
+def consumer():
+    # код потребителя
+    pop_count = 0
+    while True:
+        with g_lock:
+            # получаем продукцию со склада
+            if g_storage:
+                pop_count += 1
+                print(f"{pop_count}: {g_storage.pop()}")
+        if pop_count == g_maxProduct:
+            break
+
+
+if __name__ == '__main__':
+    producer_thread = threading.Thread(target=producer)
+    consumer_thread = threading.Thread(target=consumer)
+
+    producer_thread.start()
+    consumer_thread.start()
+
+    producer_thread.join()
+    consumer_thread.join()
