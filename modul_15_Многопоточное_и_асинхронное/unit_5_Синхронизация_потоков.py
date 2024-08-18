@@ -1,29 +1,33 @@
 import threading
 
 gX = 0
+threadsInfo = {}
+lock = threading.Lock()
 
 
-def threadFunc(lock):
+def threadFunc(threadMark):
     print('thread started')
     global gX
-    for i in range(100000):
-        # захватываем лок, делая все операции далее монопольными
+    while True:
         with lock:
+            if gX >= 10000:
+                break
+
             gX = gX + 1
+            threadsInfo[threadMark] += 1
+            print(f'thread {threadMark}: {gX}')
 
 
 if __name__ == "__main__":
-    gX = 0
-
     threads = []
-    for i in range(5):
-        # и передаём его в качестве аргумента в каждый поток
-        threads.append(threading.Thread(target=threadFunc, args=()))
-
-    for thread in threads:
+    for i in range(3):
+        threadMark = f'Thread - {i}'
+        threadsInfo[threadMark] = 0
+        thread = threading.Thread(target=threadFunc, args=(threadMark,))
         thread.start()
+        threads.append(thread)
 
     for thread in threads:
         thread.join()
 
-    print(gX)
+    print(threadsInfo)
