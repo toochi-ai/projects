@@ -1,6 +1,6 @@
 import random
-import time
 import threading
+import time
 
 gX = 0
 threadsInfo = {}
@@ -136,6 +136,11 @@ if __name__ == '__main__':
     consumer_thread.join()
 print('---')
 
+#  События
+#
+# Объект Event — это потокобезопасный признак,
+# который потоки могут устанавливать и снимать.
+
 event = threading.Event()
 
 
@@ -154,3 +159,65 @@ if __name__ == "__main__":
     event.set()
 
     t.join()
+print('---')
+
+#  Состояния
+#
+# Объект Condition — это своеобразный гибрид объектов Lock и Event.
+# Он позволяет захватывать событие при помощи метода acquire(),
+# ожидать доступности методом wait() и оповещать о доступности методом notify()
+#
+# condition = threading.Condition()
+#
+#
+# def producer():
+#     condition.acquire()
+#     # код производителя
+#     condition.notify_all()
+#     condition.release()
+#
+#
+# def consumer():
+#     condition.acquire()
+#     # ожидаем доступности
+#     condition.wait()
+#     # код потребителя
+#     condition.release()
+
+g_lock = threading.Condition()
+
+
+def producer():
+    #  код производителя
+    for i in range(g_maxProduct):
+        #  захватываем лок
+        with g_lock:
+            g_storage.append(random.randint(0, 100))
+            # говорим о том, что есть продукция
+            g_lock.notify()
+
+
+def consumer():
+    # код потребителя
+    pop_count = 0
+    while True:
+        with g_lock:
+            # если склад пуст, ожидаем новых поступлений
+            if not g_storage:
+                g_lock.wait()
+            pop_count += 1
+            print(f"{pop_count}: {g_storage.pop()}")
+
+        if pop_count == g_maxProduct:
+            break
+
+
+if __name__ == '__main__':
+    producer_thread = threading.Thread(target=producer)
+    consumer_thread = threading.Thread(target=consumer)
+
+    producer_thread.start()
+    consumer_thread.start()
+
+    producer_thread.join()
+    consumer_thread.join()
