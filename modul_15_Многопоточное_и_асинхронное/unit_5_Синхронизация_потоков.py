@@ -1,4 +1,5 @@
 import random
+import time
 import threading
 
 gX = 0
@@ -133,3 +134,23 @@ if __name__ == '__main__':
 
     producer_thread.join()
     consumer_thread.join()
+print('---')
+
+event = threading.Event()
+
+
+def threadFunc():
+    print("thread started")
+    event.wait()
+    print("event --> process")
+
+
+if __name__ == "__main__":
+    t = threading.Thread(target=threadFunc, args=())
+    t.start()
+    # пока мы не установим флаг,
+    # ожидающие потоки будут приостановлены
+    time.sleep(3)
+    event.set()
+
+    t.join()
