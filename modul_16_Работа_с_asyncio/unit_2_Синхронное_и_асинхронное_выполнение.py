@@ -82,8 +82,7 @@ async def main():
     # ожидаем выполнения нескольких корутин одновременно
     await asyncio.wait([async_func(), async_func()])
 
-
-if __name__ == "__main__":
-    tm = time.time()
-    asyncio.run(main())
-    print(f'total time elapsed {time.time() - tm}')
+    if __name__ == "__main__":
+        tm = time.time()
+        asyncio.run(main())
+        print(f'total time elapsed {time.time() - tm}')
