@@ -73,8 +73,7 @@ async def main():
                         async_func(2, 2, 2),
                         async_func(3, 3, 3)))
 
-
-if __name__ == "__main__":
-    tm = time.time()
-    asyncio.run(main())
-    print(f'Общее время выполнения {time.time() - tm}')
+    if __name__ == "__main__":
+        tm = time.time()
+        asyncio.run(main())
+        print(f'Общее время выполнения {time.time() - tm}')
