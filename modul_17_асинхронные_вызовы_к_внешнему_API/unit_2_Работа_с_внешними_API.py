@@ -49,3 +49,10 @@ requests.get(
     auth=HTTPDigestAuth('login', 'password')
 )
 print('---')
+
+requests.get(
+    'https://example.ru',
+    headers={
+        'PpiKey': "KGJHA42345HHSAEJGN3786r428793yhr2hf"
+    }
+)
