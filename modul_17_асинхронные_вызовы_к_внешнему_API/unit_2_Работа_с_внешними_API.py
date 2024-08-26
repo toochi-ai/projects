@@ -1,6 +1,6 @@
 import base64
 import http.client
-
+from requests.auth import HTTPDigestAuth
 import requests
 
 connection = http.client.HTTPSConnection("www.google.com")
@@ -42,3 +42,10 @@ requests.get(
         'Authorization': f"Basic {base_64_auth('login', 'password')}"
     }
 )
+print('---')
+
+requests.get(
+    'https://example.ru',
+    auth=HTTPDigestAuth('login', 'password')
+)
+print('---')
