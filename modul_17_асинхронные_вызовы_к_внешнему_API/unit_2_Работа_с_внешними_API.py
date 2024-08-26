@@ -19,4 +19,12 @@ print('---')
 response = requests.get("https://www.google.com")  # выполняем GET-запрос
 print(response.status_code)  # выводим статус ответа в терминал
 print(response.text)  # получаем результат запроса
+print('---')
 
+
+data = {"key": "value"}   # создаем словарь данных, который будем отправлять в запросе
+response = requests.post("https://www.example.com/post", data=data)   # при отправке POST запроса,
+# помимо адреса необходимо добавить тело запроса, в этом случае словарик data
+
+print(response.status_code)
+print(response.text)
