@@ -53,6 +53,16 @@ print('---')
 requests.get(
     'https://example.ru',
     headers={
-        'PpiKey': "KGJHA42345HHSAEJGN3786r428793yhr2hf"
+        'ApiKey': "KGJHA42345HHSAEJGN3786r428793yhr2hf"
+    }
+)
+print('---')
+
+requests.get(
+    'https://example.ru',
+    headers={
+        'Authorization': "Bearer "
+                         "eyJ0eXAiOiJKV1QiLCJhbGfgTYHdiJ9.eyJob1RlbF9jb2RlIjoiTgbxODY1In0.uzFG"
+                         "sgHTGFVOGnyrGbaIKS2zwlWzycOum1ydRBg"
     }
 )
