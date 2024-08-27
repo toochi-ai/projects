@@ -1,6 +1,7 @@
 import asyncio
 import json
 import time
+from datetime import datetime, timedelta
 
 import aiohttp
 
@@ -29,7 +30,7 @@ async def curr_requests():
 t = time.time()
 currencies = asyncio.run(curr_requests())
 print(f'Времени прошло {time.time() - t}')
-print('-----')
+print('---')
 
 
 async def fetch(session, url):
@@ -51,3 +52,36 @@ tp = time.time()
 currency = asyncio.run(curr_request())
 print(f'Времени прошло {time.time() - tp}')
 print('---')
+
+
+# Мы получили ощутимый прирост в скорости. Более того, чем больше мы будем делать запросов
+# через .gather(), тем сильнее будет расти выгода в скорости.
+# Однако, всё не так просто. В целях снижения нагрузки на сервера разработчики API часто ставят
+# ограничения на количество запросов в единицу времени. Например, в нашем случае лимит — 10 запросов
+# в минуту (по какой-то причине сервис пропускает больше реальных запросов в минуту, но это значение
+# не постоянно, нам гарантированы 10 запросов и мы будем придерживаться этого ограничения для достижения
+# стабильной интеграции без потерь). Нам нужно учитывать эти ограничения и, в случае превышения лимита,
+# нужно заставить программу подождать. При этом запросы, которые не были обработаны из-за превышения лимита
+# следует попробовать перезапустить. Эти действия должны быть автоматическими, чтобы наш сервис работал
+# эффективно и бесперебойно.
+# Давайте попробуем получить исторические данные по курсам валют за последние 20 дней:
+
+async def fetching(session, url):
+    async with session.get(url, headers={'apikey': token}) as resp:
+        print(resp.status)
+        return await resp.json()
+
+
+async def cur_request():
+    async with aiohttp.ClientSession() as session:
+        base = datetime.today() - timedelta(days=1)
+        date_list = [base - timedelta(days=x) for x in range(20)]
+        fetching_awaitable = [
+            fetching(session, f'{url}?date={d_date}')
+            for d_date in date_list
+        ]
+        return await asyncio.gather(*fetching_awaitable)
+
+
+currency_curr = asyncio.run(cur_request())
+print(json.dumps(currency_curr, indent=4, ensure_ascii=False))
