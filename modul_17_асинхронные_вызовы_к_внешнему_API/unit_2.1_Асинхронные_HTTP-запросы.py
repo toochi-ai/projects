@@ -85,3 +85,49 @@ async def cur_request():
 
 currency_curr = asyncio.run(cur_request())
 print(json.dumps(currency_curr, indent=4, ensure_ascii=False))
+print('---')
+
+error_response = {
+    'status_code': None,
+    'description': None,
+    'status': 'fail'
+}
+
+async def fetch(session, url, retries=3):
+    for i in range(retries):
+        if i > 0:
+            print(f'retry {i}')
+        async with session.get(url, headers={'apikey': token}) as resp:
+            status = resp.status
+            print(status)
+            if status // 100 == 2:
+                return await resp.json()
+            if status // 100 == 4:
+                error_response['description'] = await resp.json()
+            if status // 100 == 5:
+                error_response['description'] = await resp.text()
+    error_response['status_code'] = status
+    return error_response
+
+
+async def curr_request():
+    async with aiohttp.ClientSession() as session:
+        base = datetime.today() - timedelta(days=1)
+        date_list = [base - timedelta(days=x) for x in range(30)]
+        fetch_awaitable = [
+            fetch(session, f'{url}?date={d_date}&currencies=EUR')
+            for d_date in date_list
+        ]
+
+        packages = [fetch_awaitable[i:i + 10] for i in range(0, len(fetch_awaitable), 10)]
+        results = []
+        for i in range(len(packages)):
+            result = await asyncio.gather(*packages[i])
+            if i != len(packages) - 1:
+                await asyncio.sleep(60)
+            results.extend(result)
+        return results
+
+
+currencies = asyncio.run(curr_request())
+print(json.dumps(currencies, indent=4, ensure_ascii=False))
