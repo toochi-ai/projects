@@ -29,20 +29,25 @@ async def curr_requests():
 t = time.time()
 currencies = asyncio.run(curr_requests())
 print(f'Времени прошло {time.time() - t}')
-print('---')
+print('-----')
 
 
 async def fetch(session, url):
+    async with session.get(url, headers={'apikey': token}) as resp:
+        return resp.status
+
+
+async def curr_request():
     async with aiohttp.ClientSession() as session:
-        fetch_awaitables = [
+        fetch_awaitable = [
             fetch(session, url)
             for _ in range(5)
         ]
-        statuses = await asyncio.gather(*fetch_awaitables)
+        statuses = await asyncio.gather(*fetch_awaitable)
         print(statuses)
 
 
 tp = time.time()
-currencies = asyncio.run(curr_requests())
+currency = asyncio.run(curr_request())
 print(f'Времени прошло {time.time() - tp}')
 print('---')
