@@ -1,6 +1,7 @@
 import asyncio
 import json
 import time
+
 import aiohttp
 
 token = 'cur_live_e3prRazEr7BLmmfM9P5kVgQl3ftxs1rob8Xt2bmJ'
@@ -28,3 +29,20 @@ async def curr_requests():
 t = time.time()
 currencies = asyncio.run(curr_requests())
 print(f'Времени прошло {time.time() - t}')
+print('---')
+
+
+async def fetch(session, url):
+    async with aiohttp.ClientSession() as session:
+        fetch_awaitables = [
+            fetch(session, url)
+            for _ in range(5)
+        ]
+        statuses = await asyncio.gather(*fetch_awaitables)
+        print(statuses)
+
+
+tp = time.time()
+currencies = asyncio.run(curr_requests())
+print(f'Времени прошло {time.time() - tp}')
+print('---')
