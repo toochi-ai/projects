@@ -14,7 +14,7 @@ async def fetch(session, url):
 
 async def collect_asteroids():
     async with aiohttp.ClientSession() as session:
-        base = datetime.fromisoformat('2023-09-01')
+        base = datetime.fromisoformat('2024-08-01')
         date_list = [[base + timedelta(days=x), base + timedelta(days=x+6)] for x in range(0, 30, 7)]
         fetch_awaitables = [
             fetch(
