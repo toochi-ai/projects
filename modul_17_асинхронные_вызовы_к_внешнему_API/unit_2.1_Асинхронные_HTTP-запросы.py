@@ -93,6 +93,7 @@ error_response = {
     'status': 'fail'
 }
 
+
 async def fetch(session, url, retries=3):
     for i in range(retries):
         if i > 0:
