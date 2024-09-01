@@ -1,12 +1,19 @@
-from aiogram import Dispatcher, types
-from aiogram import F
+import asyncio
+
+import logging
+import sys
+
+from aiogram import Bot, Dispatcher, types
+from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
+from aiogram import F
 from aiogram.utils.formatting import (
-    Bold, as_list, as_marked_section
+   Bold, as_list, as_marked_section
 )
 
 from weather_handler import router
+from token_data import TOKEN
 
 dp = Dispatcher()
 dp.include_router(router)
@@ -46,3 +53,12 @@ async def commands(message: types.Message):
 @dp.message(F.text.lower() == "описание бота")
 async def description(message: types.Message):
     await message.answer("Этот бот предоставляет информацию о погоде.")
+
+
+async def main():
+    bot = Bot(TOKEN)
+    await dp.start_polling(bot)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
