@@ -52,13 +52,14 @@ async def commands(message: types.Message):
 
 
 choices = {'Показать рецепт(ы)'}
-cats = {'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat', 'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side',
-        'Starter', 'Vegan', 'Vegetarian'}
+cats = {'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat',
+        'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood',
+        'Side', 'Starter', 'Vegan', 'Vegetarian'}
 
 
 @dp.message(~F.text.lower().startswith("/"), ~F.text.in_(cats), ~F.text.in_(choices))
 async def handle_invalid_message(message: types.Message):
-    await message.answer("Простите, я не понимаю вашего сообщения. Пожалуйста, используйте доступные команды.")
+    await message.answer("Используйте доступные команды.")
 
 
 async def main() -> None:
