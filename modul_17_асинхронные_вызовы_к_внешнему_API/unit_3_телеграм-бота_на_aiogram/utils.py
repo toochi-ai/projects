@@ -7,6 +7,7 @@ async def city_lat_lon(session, city):
                 f'&limit=1&appid={OPENW_TOKEN}',
     ) as resp:
         data = await resp.json()
+
         lat = data[0]['lat']
         lon = data[0]['lon']
         return lat, lon
