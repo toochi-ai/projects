@@ -65,11 +65,11 @@ async def range_of_meal(message: types.Message, state: FSMContext):
 
         meals = data_meals.get("meals", [])
         if not meals:
-            await message.answer("Извините, но для этой категории нет рецептов.")
+            await message.answer("Для этой категории нет рецептов.")
             return
 
         if num_recipes > len(meals):
-            await message.answer(f"Извините, но в этой категории доступно только {len(meals)} рецепта.")
+            await message.answer(f"В этой категории доступно только {len(meals)} рецепта.")
             num_recipes = len(meals)
 
         selected_meals = random.sample(meals, k=num_recipes)
@@ -81,7 +81,7 @@ async def range_of_meal(message: types.Message, state: FSMContext):
         translations_name = translator.translate(recipe_names, dest="ru")
         new_recipe_names = [recipe_name.text for recipe_name in translations_name]
 
-        message_text = "Как Вам такие варианты: \n" + "\n" + "\n".join(new_recipe_names)
+        message_text = "Как Вам такие варианты:\n" + "\n".join(new_recipe_names)
 
         reply_markup = types.ReplyKeyboardMarkup(
             keyboard=[[types.KeyboardButton(text="Покажи рецепты")]],
@@ -120,11 +120,9 @@ async def id_search_meal(message: types.Message, state: FSMContext):
 
     for n, i in zip(tr_book_name_recipes, tr_book_instructions_recipes):
         await message.answer(f'{n}'
-                             f'\n'
                              f'\n Рецепт:'
                              f'\n {i}')
     reply_markup = types.ReplyKeyboardRemove()
-    await message.answer(f'Приятного аппетита!'
-                         '\n Чтобы посмотреть другие рецепты введите:'
+    await message.answer(f'Чтобы посмотреть другие рецепты введите:'
                          '\n /category_search_random (количество рецептов)', reply_markup=reply_markup)
     await state.clear()

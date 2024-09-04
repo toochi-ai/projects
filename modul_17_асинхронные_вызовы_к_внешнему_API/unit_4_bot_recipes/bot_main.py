@@ -2,16 +2,16 @@ import asyncio
 import logging
 import sys
 
-from aiogram import Bot, Dispatcher, types
-from aiogram import F
+from aiogram import Bot, Dispatcher, Router, types
 from aiogram.filters import CommandStart
 from aiogram.types import Message
+from aiogram import F
+from token_data import TOKEN
 from aiogram.utils.formatting import (
-    Bold, as_list, as_marked_section
+   Bold, as_list, as_marked_section
 )
 
 from recipes_handler import router
-from token_data import TOKEN
 
 dp = Dispatcher()
 dp.include_router(router)
@@ -34,7 +34,7 @@ async def command_start_handler(message: Message) -> None:
 
 @dp.message(F.text.lower() == "описание бота")
 async def description(message: types.Message):
-    await message.answer("Этот бот предоставляет базу данных рецептов со всего мира.")
+    await message.answer("Бот предоставляет рецепты со всего мира.")
 
 
 @dp.message(F.text.lower() == "рецепты")
@@ -50,14 +50,12 @@ async def commands(message: types.Message):
         **response.as_kwargs()
     )
 
-
-choices = {'Показать рецепт(ы)'}
-cats = {'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat',
-        'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood',
-        'Side', 'Starter', 'Vegan', 'Vegetarian'}
+choice = {'Покажи рецепты'}
+cats = {'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat', 'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side',
+        'Starter', 'Vegan', 'Vegetarian'}
 
 
-@dp.message(~F.text.lower().startswith("/"), ~F.text.in_(cats), ~F.text.in_(choices))
+@dp.message(~F.text.lower().startswith("/"), ~F.text.in_(cats), ~F.text.in_(choice))
 async def handle_invalid_message(message: types.Message):
     await message.answer("Используйте доступные команды.")
 

@@ -1,4 +1,4 @@
-async def random_meal(session, command):
+async def random_meal(session, comands):
     async with session.get(
             url=f'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
     ) as resp:
