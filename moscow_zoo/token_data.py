@@ -1,2 +1,2 @@
 
-TOKEN = 'XXX'
+TOKEN = 'YYY'
