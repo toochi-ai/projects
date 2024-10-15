@@ -26,3 +26,4 @@ result_1 = MathUtils.add(5, 3)
 result_2 = MathUtils.multiply(4, 6)
 
 print(result_1, result_2)
+#  нужна настройка для git

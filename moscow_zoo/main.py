@@ -45,3 +45,4 @@ async def main() -> None:
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())
+# настройка pycharm для git после переустановки операционки
