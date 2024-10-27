@@ -90,3 +90,9 @@ for j in a3:
 bestPostCom = Comment.objects.filter(post=3)
 bestPostCom
 
+ for i in bestPostCom:
+     i.time_in
+     i.user
+     i.rating
+     i.text_comment
+
