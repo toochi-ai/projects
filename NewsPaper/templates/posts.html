@@ -3,12 +3,30 @@
 
 <!-- Название у нас будет products -->
 {% block title %}
-    Posts
+News
 {% endblock title %}
 
 
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
 <h1>Все посты</h1>
-{{ posts }}
+    <h3> Количество новостей {{ posts|length }}</h3>
+    {% if posts %}
+    <table>
+    <tr>
+        <td>Заголовок</td>
+        <td>Дата публикации</td>
+        <td>Текст статьи</td>
+    </tr>
+    {% for post in posts %}
+    <tr>
+    <td>{{ post.title_article_news }}</td>
+    <td>{{ post.time_in|date:'d.m.Y' }}</td>
+    <td>{{ post.text_article_news|truncatewords:20 }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    {% else %}
+    <h2>Новостей нет</h2>
+{% endif %}
 {% endblock content %}
